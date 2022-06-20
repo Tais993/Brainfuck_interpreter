@@ -45,17 +45,17 @@ public class Interpreter {
 
         while (iterator.hasNext()) {
             Character nextLoopChar = iterator.next();
-            if (LOOP_CLOSE == nextLoopChar) {
 
-                if (1 == loopDepth) {
-                    while (0 != array[pointer]) {
-                        run(loopBuilder.toString());
-                    }
-                    return;
+            if (LOOP_CLOSE == nextLoopChar && 1 == loopDepth) {
 
-                } else {
-                    loopDepth--;
+                String code = loopBuilder.toString();
+                while (0 != array[pointer]) {
+                    run(code);
                 }
+                return;
+
+            } else if (LOOP_CLOSE == nextLoopChar) {
+                loopDepth--;
             } else if (LOOP_OPEN == nextLoopChar) {
                 loopDepth++;
             }
