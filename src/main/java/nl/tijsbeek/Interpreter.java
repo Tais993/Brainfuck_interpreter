@@ -3,6 +3,7 @@ package nl.tijsbeek;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class Interpreter {
     public static final int MAX_POINTER_VALUE = 3000;
@@ -19,6 +20,7 @@ public class Interpreter {
     public void run(String code) {
         Iterator<Character> iterator = code.chars()
                 .mapToObj(value -> (char) value)
+                .filter(Predicate.not(Character::isWhitespace))
                 .iterator();
 
         while (iterator.hasNext()) {
